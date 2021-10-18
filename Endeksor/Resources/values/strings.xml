@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Abysis Endeksör</string>
+  <string name="search">Ara</string>
+  <string name="title_dashboard">Gösterge</string>
+  <string name="title_notifications">Bildirim</string>
+  <string name="Login">Giriş</string>
+  <string name="hintUserName">Kullanıcı Adı</string>
+  <string name="hintPassword">Parola</string>
+  <string name="headerCode">Kod</string>
+  <string name="headerInfo">Bilgi</string>
+  <string name="loginMessage">Lütfen Bekleyin...</string>
+  <string name="Adress">Adres</string>
+  <string name="Close">Kapat</string>
+  <string name="Alert">Uyarı</string>
+  <string name="Cancel">İptal</string>
+  <string name="AskClose">Çıkış yapmak istediğinize emin misiniz?</string>
+  <string name="ActivePeriod">Aktif Dönem</string>
+  <string name="IndexTableDate">İndex Tablosu Tarihi</string>
+  <string name="CreateNewTable">Yeni Tablo Oluştur</string>
+  <string name="Choose">Seç</string>
+  <string name="ChoosePeriod">Dönem Seç</string>
+  <string name="PeriodStartValue">Dönem Başı Değeri</string>
+  <string name="NewReadedValue">Okunan Yeni Değer</string>
+  <string name="Lapped">TUR ATMIŞ</string>
+  <string name="Save">Kaydet</string>
+  <string name="SaveClose">Kaydet ve Kapat</string>
+  <string name="MeterCode">Sayaç Kod</string>
+  <string name="IndexCode">Index Kod</string>
+  <string name="IndexInfo">Index Açıklama</string>
+  <string name="Value">Değer</string>
+  <string name="ServiceURL">Servis URL</string>
+  <string name="AskPasswordSave">Şifreyi Kaydet</string>
+
+</resources>

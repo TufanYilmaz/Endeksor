@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:minWidth="300dp"
+	android:minHeight="300dp"
+	android:orientation="vertical">
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="20dp"
+		android:layout_marginTop="10dp"
+		android:text="@string/ServiceURL"
+		android:layout_weight="0"
+		android:textAppearance="?android:attr/textAppearanceLarge" />
+	<EditText
+		android:id="@+id/etServiceEndPoint"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:layout_weight="0"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+	<TextView
+		android:id="@+id/tvDevicesSerialNo"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:layout_marginLeft="20dp"
+		android:layout_marginTop="10dp"
+		android:text="Serial No"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+	<TextView
+		android:id="@+id/tvServiceInfo"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="20dp"
+		android:layout_marginTop="10dp"
+		android:textAppearance="?android:attr/textAppearanceMedium"  />
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dip"
+		android:layout_weight="1"
+		android:gravity="center|bottom"
+		android:orientation="vertical">
+		<Button
+			android:id="@+id/btnFragmentURLConfigSaveClose"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal|center"
+			android:layout_marginBottom="20dp"
+			android:background="@android:color/holo_green_light"
+			android:text="@string/SaveClose" />
+		<Button
+			android:id="@+id/btnFragmentURLConfigClose"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal|center"
+			android:background="@android:color/holo_red_light"
+			android:text="@string/Close" />
+	</LinearLayout>
+
+</LinearLayout>

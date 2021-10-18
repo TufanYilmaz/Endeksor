@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="1dp"
+    android:minHeight="25px"
+    android:minWidth="25px"
+    android:weightSum="230">
+    <TextView
+        android:id="@+id/tvROW"
+        android:text="ROW"
+		android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_weight="10"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp" />
+	<TextView
+        android:id="@+id/tvROWNumber"
+        android:text="ROW"
+		android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_weight="10"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp" />
+    <TextView
+        android:id="@+id/tvMETER_CODE"
+        android:text="METER_CODE"
+        android:layout_width="0dp"
+        android:layout_weight="60"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+		android:layout_marginBottom="10dp"
+		android:layout_marginTop="10dp"/>
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="1dp"
+        android:background="#000" />
+    <TextView
+        android:id="@+id/tvINDEXLINES_CODE"
+        android:text="INDEXLINES_CODE"
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp" />
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="1dp"
+        android:background="#000" />
+    <TextView
+        android:id="@+id/tvINDEXLINES_INFO"
+        android:text="INDEXLINES_INFO"
+        android:layout_width="0dp"
+        android:layout_weight="80"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp" />
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="1dp"
+        android:background="#000" />
+    <TextView
+        android:id="@+id/tvNEWVALUE"
+        android:text="NEWVALUE"
+        android:layout_width="0dp"
+        android:layout_weight="50"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp" />
+</LinearLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:id="@+id/layoutActActionBar"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+		<ImageView
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:src="@drawable/abysislogo" />
+		<TextView
+			android:id="@+id/tvHandTerminalInfo"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingLeft="10dp"
+			android:paddingRight="10dp"
+			android:textColor="@android:color/holo_blue_dark"
+			android:text="Term" />
+		<Button
+			android:id="@+id/btnDoSelectTerminal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Terminal"/>
+        <Button
+            android:id="@+id/btnSelectPeriod"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/ChoosePeriod"  />
+        <Button
+            android:id="@+id/btnSubscriberSearch"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+			android:layout_gravity="right"
+            android:text="@string/search" />
+    </LinearLayout>
+    <EditText
+        android:id="@+id/txtSearch"
+        android:layout_below="@id/layoutActActionBar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="@string/search"
+        android:textColor="#000"
+        android:maxLines="1" />
+    <LinearLayout
+        android:id="@+id/layoutLogin"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgAbysisLogo"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/abysislogo" />
+        <Button
+            android:text="@string/Login"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginButton"
+            android:gravity="center" />
+        <TextView
+            android:layout_below="@id/loginButton"
+            android:id="@+id/txtResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ProgressBar
+            android:layout_below="@id/txtResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginProgressBar"
+            android:visibility="invisible"
+            style="@android:style/Widget.Holo.ProgressBar.Large" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@id/layoutActActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layoutSubscribers"
+        android:visibility="invisible">
+        
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:background="#000" />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lvSubscribers"
+            android:divider="#101010"
+            android:dividerHeight="1dp" />
+    </LinearLayout>
+</RelativeLayout>

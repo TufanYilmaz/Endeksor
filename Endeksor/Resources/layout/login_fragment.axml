@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="300dp"
+    android:minHeight="400dp">
+    <Spinner
+        android:id="@+id/cmbDepartmentId"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
+        android:entries="@array/department_list" />
+    <EditText
+		android:inputType="text"
+        android:id="@+id/txtUserName"
+        android:layout_below="@id/cmbDepartmentId"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
+        android:hint="@string/hintUserName"
+        android:paddingLeft="10dp"
+        android:textColor="#000" />
+    <EditText
+        android:inputType="textPassword"
+        android:id="@+id/txtPassword"
+        android:layout_below="@id/txtUserName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
+        android:hint="@string/hintPassword"
+        android:paddingLeft="10dp"
+        android:textColor="#000" />
+	<CheckBox
+        android:id="@+id/chkPasswordSave"
+		android:layout_below="@id/txtPassword" 
+        android:text="@string/AskPasswordSave"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingLeft="10dp"
+        android:textColor="#000" />
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_below="@id/chkPasswordSave"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
+        android:paddingLeft="10dp"
+        android:textColor="#000"
+        android:text="@string/Login" />
+</RelativeLayout>

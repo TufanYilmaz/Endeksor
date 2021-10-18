@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetMeters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MeterId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMetersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMetersResult" type="tns:MeterListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MeterListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfMeter" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:Message" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Message">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ResultType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReadGroupIndexListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfBaseSubscription" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfBaseSubscription">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="baseSubscription" nillable="true" type="tns:baseSubscription" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="baseSubscription">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Meters" type="tns:ArrayOfBaseMeter" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="baseClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OSFLine">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IndexId" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="DateTime" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="RawValue" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="Multiplier" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:decimal" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PairedIndex">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IsOrdered" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Multiplier" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="AdditionalValue" type="s:double" />
+              <s:element minOccurs="0" maxOccurs="1" name="PriorValue" type="tns:baseIndexValue" />
+              <s:element minOccurs="0" maxOccurs="1" name="NewValue" type="tns:baseIndexValue" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="baseIndexValue">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RawValue" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="baseMeter">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Values" type="tns:ArrayOfPairedIndex" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfPairedIndex">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PairedIndex" nillable="true" type="tns:PairedIndex" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="indexInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UseMultiplier" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="DataType" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="DataTypeInfo" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="WebVisible" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="WebMainPage" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsOrdered" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="tariffBase">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Code1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Code2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Code3" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="tariff">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:tariffBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="items" type="tns:ArrayOfIndexInfo" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfIndexInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="indexInfo" nillable="true" type="tns:indexInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="meter">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Mark" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Driver" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ContractPower" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="SettedPower" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Multiplier" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="SubscriberId" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="DepartmentId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="DepartmentCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubscriberCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MeterYear" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ProfilePeriod" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="UsingPlace" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="UsingPlaceString" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Cancelled" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="subscriberAttachState" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Mechanics" type="tns:ArrayOfMeterMechanic" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfMeterMechanic">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="meterMechanic" nillable="true" type="tns:meterMechanic" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="meterMechanic">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LineNo" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Serial" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Class" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SealNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProdYear" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CalibrationDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="QMin" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="QMax" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PressValue" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Radius" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBaseMeter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="baseMeter" nillable="true" type="tns:baseMeter" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMeter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="meter" nillable="true" type="tns:meter" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMetersStated">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMetersStatedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMetersStatedResult" type="tns:MeterListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMetersbyCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="MeterCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMetersbyCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMetersbyCodeResult" type="tns:MeterListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTariffList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="SubscriberId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTariffListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTariffListResult" type="tns:TariffListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TariffListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfTariff" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfTariff">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="tariff" nillable="true" type="tns:tariff" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetIndexList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIndexListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIndexListResult" type="tns:IndexListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="IndexListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfIndexInfo" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetIndexesByReadGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="readgroupId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TerminalId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="SubscriberId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIndexesByReadGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIndexesByReadGroupResult" type="tns:ReadGroupIndexListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReadGroups">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="periodId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReadGroupsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReadGroupsResult" type="tns:ReadGroupResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReadGroupResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfReadgroup" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfReadgroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="readgroup" nillable="true" type="tns:readgroup" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="readgroup">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateTime" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateDefaultReadGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="periodId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateDefaultReadGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateDefaultReadGroupResult" type="tns:BaseResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIndexValueList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="BeginDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MeterId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="IndexId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIndexValueListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIndexValueListResult" type="tns:IndexValueListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="IndexValueListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfIndexValue" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfIndexValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="indexValue" nillable="true" type="tns:indexValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="indexValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IndexInfo" type="tns:indexInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="dateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SubscriberId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MeterId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RawValue" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Multiplier" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="FixedValue" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Reference" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Source" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreatedBy" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreatedDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="TariffFormula" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderBy" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddIndexValueList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="indexList" type="tns:ArrayOfIndexValueParam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfIndexValueParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="indexValueParam" nillable="true" type="tns:indexValueParam" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="indexValueParam">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="dateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SubscriberId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MeterId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IndexId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RawValue" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Reference" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddIndexValueListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddIndexValueListResult" type="tns:IndexValueListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIndexValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Reference" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIndexValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIndexValueResult" type="tns:IndexValueListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddIndexValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DateTime" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MeterId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="IndexId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RawValue" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="Reference" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddIndexValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddIndexValueResult" type="tns:IndexValueResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="IndexValueResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Reference" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SetIndexValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Reference" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DateTime" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MeterId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="IndexId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RawValue" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetIndexValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetIndexValueResult" type="tns:IndexValueResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DropIndexValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Reference" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DropIndexValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DropIndexValueResult" type="tns:IndexValueResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getOSFLineList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="meterId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="beginDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getOSFLineListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getOSFLineListResult" type="tns:OSFLineListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OSFLineListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfOSFLine" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfOSFLine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OSFLine" nillable="true" type="tns:OSFLine" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getIndexValuesMatrix">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="meterId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="beginDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getIndexValuesMatrixResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getIndexValuesMatrixResult" type="tns:IndexValuesMatrixResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="IndexValuesMatrixResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:IndexValuesMatrix" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="IndexValuesMatrix">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IndexList" type="tns:ArrayOfIndexInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Values" type="tns:ArrayOfMatrixLine" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMatrixLine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MatrixLine" nillable="true" type="tns:MatrixLine" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MatrixLine">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="value1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="value2" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="value3" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="value4" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="value5" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="value6" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="value7" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="value8" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="value9" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="value10" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="value11" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="value12" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetConsumptionValues">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="meterId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="indexId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="beginDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConsumptionValuesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConsumptionValuesResult" type="tns:ConsumptionValueResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ConsumptionValueResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfConsumptionValue" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfConsumptionValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ConsumptionValue" nillable="true" type="tns:ConsumptionValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ConsumptionValue">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Duration" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PriorRawValue" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="RawValue" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Multiplier" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PriorFixValue" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="FixedValue" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetMetersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMeters" />
+  </wsdl:message>
+  <wsdl:message name="GetMetersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMetersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMetersStatedSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMetersStated" />
+  </wsdl:message>
+  <wsdl:message name="GetMetersStatedSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMetersStatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMetersbyCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMetersbyCode" />
+  </wsdl:message>
+  <wsdl:message name="GetMetersbyCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMetersbyCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTariffListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTariffList" />
+  </wsdl:message>
+  <wsdl:message name="GetTariffListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTariffListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIndexListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIndexList" />
+  </wsdl:message>
+  <wsdl:message name="GetIndexListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIndexListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIndexesByReadGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIndexesByReadGroup" />
+  </wsdl:message>
+  <wsdl:message name="GetIndexesByReadGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIndexesByReadGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReadGroupsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReadGroups" />
+  </wsdl:message>
+  <wsdl:message name="GetReadGroupsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReadGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateDefaultReadGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateDefaultReadGroup" />
+  </wsdl:message>
+  <wsdl:message name="CreateDefaultReadGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateDefaultReadGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIndexValueListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIndexValueList" />
+  </wsdl:message>
+  <wsdl:message name="GetIndexValueListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIndexValueListResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddIndexValueListSoapIn">
+    <wsdl:part name="parameters" element="tns:AddIndexValueList" />
+  </wsdl:message>
+  <wsdl:message name="AddIndexValueListSoapOut">
+    <wsdl:part name="parameters" element="tns:AddIndexValueListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIndexValueSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIndexValue" />
+  </wsdl:message>
+  <wsdl:message name="GetIndexValueSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIndexValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddIndexValueSoapIn">
+    <wsdl:part name="parameters" element="tns:AddIndexValue" />
+  </wsdl:message>
+  <wsdl:message name="AddIndexValueSoapOut">
+    <wsdl:part name="parameters" element="tns:AddIndexValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetIndexValueSoapIn">
+    <wsdl:part name="parameters" element="tns:SetIndexValue" />
+  </wsdl:message>
+  <wsdl:message name="SetIndexValueSoapOut">
+    <wsdl:part name="parameters" element="tns:SetIndexValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="DropIndexValueSoapIn">
+    <wsdl:part name="parameters" element="tns:DropIndexValue" />
+  </wsdl:message>
+  <wsdl:message name="DropIndexValueSoapOut">
+    <wsdl:part name="parameters" element="tns:DropIndexValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOSFLineListSoapIn">
+    <wsdl:part name="parameters" element="tns:getOSFLineList" />
+  </wsdl:message>
+  <wsdl:message name="getOSFLineListSoapOut">
+    <wsdl:part name="parameters" element="tns:getOSFLineListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getIndexValuesMatrixSoapIn">
+    <wsdl:part name="parameters" element="tns:getIndexValuesMatrix" />
+  </wsdl:message>
+  <wsdl:message name="getIndexValuesMatrixSoapOut">
+    <wsdl:part name="parameters" element="tns:getIndexValuesMatrixResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConsumptionValuesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConsumptionValues" />
+  </wsdl:message>
+  <wsdl:message name="GetConsumptionValuesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConsumptionValuesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IndexesSoap">
+    <wsdl:operation name="GetMeters">
+      <wsdl:input message="tns:GetMetersSoapIn" />
+      <wsdl:output message="tns:GetMetersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMetersStated">
+      <wsdl:input message="tns:GetMetersStatedSoapIn" />
+      <wsdl:output message="tns:GetMetersStatedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMetersbyCode">
+      <wsdl:input message="tns:GetMetersbyCodeSoapIn" />
+      <wsdl:output message="tns:GetMetersbyCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTariffList">
+      <wsdl:input message="tns:GetTariffListSoapIn" />
+      <wsdl:output message="tns:GetTariffListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexList">
+      <wsdl:input message="tns:GetIndexListSoapIn" />
+      <wsdl:output message="tns:GetIndexListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexesByReadGroup">
+      <wsdl:input message="tns:GetIndexesByReadGroupSoapIn" />
+      <wsdl:output message="tns:GetIndexesByReadGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReadGroups">
+      <wsdl:input message="tns:GetReadGroupsSoapIn" />
+      <wsdl:output message="tns:GetReadGroupsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDefaultReadGroup">
+      <wsdl:input message="tns:CreateDefaultReadGroupSoapIn" />
+      <wsdl:output message="tns:CreateDefaultReadGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexValueList">
+      <wsdl:input message="tns:GetIndexValueListSoapIn" />
+      <wsdl:output message="tns:GetIndexValueListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddIndexValueList">
+      <wsdl:input message="tns:AddIndexValueListSoapIn" />
+      <wsdl:output message="tns:AddIndexValueListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexValue">
+      <wsdl:input message="tns:GetIndexValueSoapIn" />
+      <wsdl:output message="tns:GetIndexValueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddIndexValue">
+      <wsdl:input message="tns:AddIndexValueSoapIn" />
+      <wsdl:output message="tns:AddIndexValueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIndexValue">
+      <wsdl:input message="tns:SetIndexValueSoapIn" />
+      <wsdl:output message="tns:SetIndexValueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DropIndexValue">
+      <wsdl:input message="tns:DropIndexValueSoapIn" />
+      <wsdl:output message="tns:DropIndexValueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getOSFLineList">
+      <wsdl:input message="tns:getOSFLineListSoapIn" />
+      <wsdl:output message="tns:getOSFLineListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getIndexValuesMatrix">
+      <wsdl:input message="tns:getIndexValuesMatrixSoapIn" />
+      <wsdl:output message="tns:getIndexValuesMatrixSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsumptionValues">
+      <wsdl:input message="tns:GetConsumptionValuesSoapIn" />
+      <wsdl:output message="tns:GetConsumptionValuesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IndexesSoap" type="tns:IndexesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetMeters">
+      <soap:operation soapAction="http://tempuri.org/GetMeters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMetersStated">
+      <soap:operation soapAction="http://tempuri.org/GetMetersStated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMetersbyCode">
+      <soap:operation soapAction="http://tempuri.org/GetMetersbyCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTariffList">
+      <soap:operation soapAction="http://tempuri.org/GetTariffList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexList">
+      <soap:operation soapAction="http://tempuri.org/GetIndexList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexesByReadGroup">
+      <soap:operation soapAction="http://tempuri.org/GetIndexesByReadGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReadGroups">
+      <soap:operation soapAction="http://tempuri.org/GetReadGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDefaultReadGroup">
+      <soap:operation soapAction="http://tempuri.org/CreateDefaultReadGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexValueList">
+      <soap:operation soapAction="http://tempuri.org/GetIndexValueList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddIndexValueList">
+      <soap:operation soapAction="http://tempuri.org/AddIndexValueList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexValue">
+      <soap:operation soapAction="http://tempuri.org/GetIndexValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddIndexValue">
+      <soap:operation soapAction="http://tempuri.org/AddIndexValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIndexValue">
+      <soap:operation soapAction="http://tempuri.org/SetIndexValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DropIndexValue">
+      <soap:operation soapAction="http://tempuri.org/DropIndexValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOSFLineList">
+      <soap:operation soapAction="http://tempuri.org/getOSFLineList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getIndexValuesMatrix">
+      <soap:operation soapAction="http://tempuri.org/getIndexValuesMatrix" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsumptionValues">
+      <soap:operation soapAction="http://tempuri.org/GetConsumptionValues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IndexesSoap12" type="tns:IndexesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetMeters">
+      <soap12:operation soapAction="http://tempuri.org/GetMeters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMetersStated">
+      <soap12:operation soapAction="http://tempuri.org/GetMetersStated" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMetersbyCode">
+      <soap12:operation soapAction="http://tempuri.org/GetMetersbyCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTariffList">
+      <soap12:operation soapAction="http://tempuri.org/GetTariffList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexList">
+      <soap12:operation soapAction="http://tempuri.org/GetIndexList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexesByReadGroup">
+      <soap12:operation soapAction="http://tempuri.org/GetIndexesByReadGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReadGroups">
+      <soap12:operation soapAction="http://tempuri.org/GetReadGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDefaultReadGroup">
+      <soap12:operation soapAction="http://tempuri.org/CreateDefaultReadGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexValueList">
+      <soap12:operation soapAction="http://tempuri.org/GetIndexValueList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddIndexValueList">
+      <soap12:operation soapAction="http://tempuri.org/AddIndexValueList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndexValue">
+      <soap12:operation soapAction="http://tempuri.org/GetIndexValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddIndexValue">
+      <soap12:operation soapAction="http://tempuri.org/AddIndexValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIndexValue">
+      <soap12:operation soapAction="http://tempuri.org/SetIndexValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DropIndexValue">
+      <soap12:operation soapAction="http://tempuri.org/DropIndexValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOSFLineList">
+      <soap12:operation soapAction="http://tempuri.org/getOSFLineList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getIndexValuesMatrix">
+      <soap12:operation soapAction="http://tempuri.org/getIndexValuesMatrix" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsumptionValues">
+      <soap12:operation soapAction="http://tempuri.org/GetConsumptionValues" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Indexes">
+    <wsdl:port name="IndexesSoap" binding="tns:IndexesSoap">
+      <soap:address location="http://95.6.50.139:90/Services/Indexes.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IndexesSoap12" binding="tns:IndexesSoap12">
+      <soap12:address location="http://95.6.50.139:90/Services/Indexes.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

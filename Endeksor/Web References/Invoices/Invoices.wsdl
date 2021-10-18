@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetPeriods">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchPeriod" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPeriodsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPeriodsResult" type="tns:PeriodListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PeriodListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfPeriod" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:Message" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Message">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ResultType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPeriod">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="period" nillable="true" type="tns:period" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="period">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BeginDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastPayDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="InvoiceDate" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="baseClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="invoiceLine">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Meter" type="tns:meter" />
+              <s:element minOccurs="1" maxOccurs="1" name="BeginIndex" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="EndIndex" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="IndexAmount" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="Multiplier" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="FixedAmount" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="AdditionalAmount1" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="AdditionalAmount2" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="Total" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="VatRate" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Vat" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="LineDataType" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="TarifLineFormula" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PriceCode" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="meter">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Mark" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Driver" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ContractPower" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="SettedPower" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Multiplier" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="SubscriberId" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="DepartmentId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="DepartmentCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubscriberCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MeterYear" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ProfilePeriod" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="UsingPlace" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="UsingPlaceString" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Cancelled" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="subscriberAttachState" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Mechanics" type="tns:ArrayOfMeterMechanic" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfMeterMechanic">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="meterMechanic" nillable="true" type="tns:meterMechanic" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="meterMechanic">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LineNo" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Serial" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Class" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SealNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProdYear" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CalibrationDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="QMin" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="QMax" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PressValue" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Radius" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ConstantValue">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="OrderBy" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Total" type="s:double" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="group">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="tariffBase">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Code1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Code2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Code3" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="department">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="departmentType" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Relevant" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Adres" type="tns:address" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contact" type="tns:contacts" />
+              <s:element minOccurs="0" maxOccurs="1" name="taxInfo" type="tns:taxInfo" />
+              <s:element minOccurs="0" maxOccurs="1" name="PrefixEInvoice" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PrefixEArchive" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="address">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="addressType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Line1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Line2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Line3" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TownId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Town" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CityId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="contacts">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Phone1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gsm" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gsm2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gsm3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Web" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="taxInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TaxType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaxOffice" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="subscriber">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Department" type="tns:department" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubscriberType" type="tns:baseClass" />
+              <s:element minOccurs="0" maxOccurs="1" name="Tariff" type="tns:tariffBase" />
+              <s:element minOccurs="0" maxOccurs="1" name="Group" type="tns:group" />
+              <s:element minOccurs="0" maxOccurs="1" name="TaxInfo" type="tns:taxInfo" />
+              <s:element minOccurs="0" maxOccurs="1" name="Address" type="tns:address" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contacts" type="tns:contacts" />
+              <s:element minOccurs="0" maxOccurs="1" name="MainMeter" type="tns:meter" />
+              <s:element minOccurs="0" maxOccurs="1" name="UniqueNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PmumId" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Order" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubMeters" type="tns:ArrayOfMeter" />
+              <s:element minOccurs="0" maxOccurs="1" name="Relevant" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Constants" type="tns:ArrayOfConstantValue" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfMeter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="meter" nillable="true" type="tns:meter" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfConstantValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ConstantValue" nillable="true" type="tns:ConstantValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="invoiceBase">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastPayDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="InvoiceType" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="EInvoice" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvoiceNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Period" type="tns:period" />
+              <s:element minOccurs="0" maxOccurs="1" name="Subscriber" type="tns:subscriber" />
+              <s:element minOccurs="0" maxOccurs="1" name="Info1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Info2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Info3" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Info4" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="RaiseAmount" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="SubTotal1" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="FundTotal" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="SubTotal2" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="VatList" type="tns:ArrayOfVatAmount" />
+              <s:element minOccurs="1" maxOccurs="1" name="InvoiceTotal" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="OldDebit" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="OldDebit2" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="WageState" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="WageId" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfVatAmount">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="VatAmount" nillable="true" type="tns:VatAmount" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VatAmount">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Rate" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Base" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="invoice">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:invoiceBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Lines" type="tns:ArrayOfInvoiceLine" />
+              <s:element minOccurs="0" maxOccurs="1" name="PtfDetails" type="tns:invoicePtfDetails" />
+              <s:element minOccurs="0" maxOccurs="1" name="EInvoiceData" type="tns:EInvoice" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfInvoiceLine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="invoiceLine" nillable="true" type="tns:invoiceLine" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="invoicePtfDetails">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="totalAmounts" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="totalConsumptions" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="yekdemPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="APTFPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="FinancialCostPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnergyPrice" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Lines" type="tns:ArrayOfInvoicePtfLine" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInvoicePtfLine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="invoicePtfLine" nillable="true" type="tns:invoicePtfLine" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="invoicePtfLine">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MeterCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Operation" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="dateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="consumption" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="generation" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="netAmount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="price" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="total" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="invoiceTotal" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EInvoice">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EInvoiceBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PkList" type="tns:ArrayOfGibUserAlias" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsNew" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="SubscriptionId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubscriptionCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubscriptionInfo" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="InvoiceType" type="tns:InvoiceType" />
+              <s:element minOccurs="0" maxOccurs="1" name="PkAlias" type="tns:GibUserAlias" />
+              <s:element minOccurs="0" maxOccurs="1" name="DocumentType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ElectronicMail" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EInvoiceBase">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DepartmentId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PeriodId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="InvoiceId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvoiceNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StatusNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GibStatus" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnvelopeID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OldStatus" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGibUserAlias">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GibUserAlias" nillable="true" type="tns:GibUserAlias" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GibUserAlias">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PortalId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="GibUserId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Alias" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FirstCreationTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="AliasCreationTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="isDefault" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="InvoiceType">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="Normal" />
+          <s:enumeration value="EInvoice" />
+          <s:enumeration value="EArchive" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetInvoices">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PeriodId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="InvoiceType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Filter" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInvoicesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInvoicesResult" type="tns:InvoiceListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InvoiceListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfInvoice" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfInvoice">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="invoice" nillable="true" type="tns:invoice" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetInvoicesForSubscriber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="InvoiceType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="BeginDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInvoicesForSubscriberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInvoicesForSubscriberResult" type="tns:InvoiceListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInvoiceFieldsForSubscriber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="InvoiceType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="BeginDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetInvoiceFieldsForSubscriberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInvoiceFieldsForSubscriberResult" type="tns:DataTableResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DataTableResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value">
+                <s:complexType>
+                  <s:sequence>
+                    <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                    <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                  </s:sequence>
+                </s:complexType>
+              </s:element>
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetPTFPrices">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BeginDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPTFPricesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPTFPricesResult" type="tns:PTFPriceListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PTFPriceListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfPTFPrice" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfPTFPrice">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PTFPrice" nillable="true" type="tns:PTFPrice" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PTFPrice">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetInvoiceBySubscriber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="InvoiceType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="BeginDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="SubscriberId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInvoiceBySubscriberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInvoiceBySubscriberResult" type="tns:InvoiceListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInvoice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PeriodId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="InvoiceId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInvoiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInvoiceResult" type="tns:InvoiceResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InvoiceResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:invoice" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SetInvoiceNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="InvoiceId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="InvoiceNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetInvoiceNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetInvoiceNumberResult" type="tns:Message" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetInvoiceWageId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="InvoiceId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="WageId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetInvoiceWageIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetInvoiceWageIdResult" type="tns:Message" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEInvoice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="InvoiceId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEInvoiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEInvoiceResult" type="tns:EInvoiceResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EInvoiceResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:EInvoice" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetWageLine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="InvoiceId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EmptyLineStatus" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWageLineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWageLineResult" type="tns:WageLinesResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WageLinesResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfWageLine" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfWageLine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="wageLine" nillable="true" type="tns:wageLine" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="wageLine">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="INVOICE_ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DATE_" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="GRP" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="INDEX_CODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MUH_CODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TRANSFER_CODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="INDEX_INFO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="INFO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AMOUNT" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PRICE" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEBIT" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CREDIT" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="VAT_RATE" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="VAT" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="INVOICE_LINE_ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="INVOICE_TYPE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VAT_CODE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPARTMENT_ID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPeriodsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPeriods" />
+  </wsdl:message>
+  <wsdl:message name="GetPeriodsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPeriodsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoicesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInvoices" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoicesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInvoicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoicesForSubscriberSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInvoicesForSubscriber" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoicesForSubscriberSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInvoicesForSubscriberResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceFieldsForSubscriberSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInvoiceFieldsForSubscriber" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceFieldsForSubscriberSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInvoiceFieldsForSubscriberResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPTFPricesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPTFPrices" />
+  </wsdl:message>
+  <wsdl:message name="GetPTFPricesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPTFPricesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceBySubscriberSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInvoiceBySubscriber" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceBySubscriberSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInvoiceBySubscriberResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInvoice" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetInvoiceNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:SetInvoiceNumber" />
+  </wsdl:message>
+  <wsdl:message name="SetInvoiceNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:SetInvoiceNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetInvoiceWageIdSoapIn">
+    <wsdl:part name="parameters" element="tns:SetInvoiceWageId" />
+  </wsdl:message>
+  <wsdl:message name="SetInvoiceWageIdSoapOut">
+    <wsdl:part name="parameters" element="tns:SetInvoiceWageIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEInvoiceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEInvoice" />
+  </wsdl:message>
+  <wsdl:message name="GetEInvoiceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWageLineSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWageLine" />
+  </wsdl:message>
+  <wsdl:message name="GetWageLineSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWageLineResponse" />
+  </wsdl:message>
+  <wsdl:portType name="InvoicesSoap">
+    <wsdl:operation name="GetPeriods">
+      <wsdl:input message="tns:GetPeriodsSoapIn" />
+      <wsdl:output message="tns:GetPeriodsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoices">
+      <wsdl:input message="tns:GetInvoicesSoapIn" />
+      <wsdl:output message="tns:GetInvoicesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoicesForSubscriber">
+      <wsdl:input message="tns:GetInvoicesForSubscriberSoapIn" />
+      <wsdl:output message="tns:GetInvoicesForSubscriberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceFieldsForSubscriber">
+      <wsdl:input message="tns:GetInvoiceFieldsForSubscriberSoapIn" />
+      <wsdl:output message="tns:GetInvoiceFieldsForSubscriberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPTFPrices">
+      <wsdl:input message="tns:GetPTFPricesSoapIn" />
+      <wsdl:output message="tns:GetPTFPricesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceBySubscriber">
+      <wsdl:input message="tns:GetInvoiceBySubscriberSoapIn" />
+      <wsdl:output message="tns:GetInvoiceBySubscriberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoice">
+      <wsdl:input message="tns:GetInvoiceSoapIn" />
+      <wsdl:output message="tns:GetInvoiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetInvoiceNumber">
+      <wsdl:input message="tns:SetInvoiceNumberSoapIn" />
+      <wsdl:output message="tns:SetInvoiceNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetInvoiceWageId">
+      <wsdl:input message="tns:SetInvoiceWageIdSoapIn" />
+      <wsdl:output message="tns:SetInvoiceWageIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoice">
+      <wsdl:input message="tns:GetEInvoiceSoapIn" />
+      <wsdl:output message="tns:GetEInvoiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWageLine">
+      <wsdl:input message="tns:GetWageLineSoapIn" />
+      <wsdl:output message="tns:GetWageLineSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InvoicesSoap" type="tns:InvoicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPeriods">
+      <soap:operation soapAction="http://tempuri.org/GetPeriods" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoices">
+      <soap:operation soapAction="http://tempuri.org/GetInvoices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoicesForSubscriber">
+      <soap:operation soapAction="http://tempuri.org/GetInvoicesForSubscriber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceFieldsForSubscriber">
+      <soap:operation soapAction="http://tempuri.org/GetInvoiceFieldsForSubscriber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPTFPrices">
+      <soap:operation soapAction="http://tempuri.org/GetPTFPrices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceBySubscriber">
+      <soap:operation soapAction="http://tempuri.org/GetInvoiceBySubscriber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoice">
+      <soap:operation soapAction="http://tempuri.org/GetInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInvoiceNumber">
+      <soap:operation soapAction="http://tempuri.org/SetInvoiceNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInvoiceWageId">
+      <soap:operation soapAction="http://tempuri.org/SetInvoiceWageId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoice">
+      <soap:operation soapAction="http://tempuri.org/GetEInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWageLine">
+      <soap:operation soapAction="http://tempuri.org/GetWageLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="InvoicesSoap12" type="tns:InvoicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPeriods">
+      <soap12:operation soapAction="http://tempuri.org/GetPeriods" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoices">
+      <soap12:operation soapAction="http://tempuri.org/GetInvoices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoicesForSubscriber">
+      <soap12:operation soapAction="http://tempuri.org/GetInvoicesForSubscriber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceFieldsForSubscriber">
+      <soap12:operation soapAction="http://tempuri.org/GetInvoiceFieldsForSubscriber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPTFPrices">
+      <soap12:operation soapAction="http://tempuri.org/GetPTFPrices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceBySubscriber">
+      <soap12:operation soapAction="http://tempuri.org/GetInvoiceBySubscriber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoice">
+      <soap12:operation soapAction="http://tempuri.org/GetInvoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInvoiceNumber">
+      <soap12:operation soapAction="http://tempuri.org/SetInvoiceNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInvoiceWageId">
+      <soap12:operation soapAction="http://tempuri.org/SetInvoiceWageId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEInvoice">
+      <soap12:operation soapAction="http://tempuri.org/GetEInvoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWageLine">
+      <soap12:operation soapAction="http://tempuri.org/GetWageLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Invoices">
+    <wsdl:port name="InvoicesSoap" binding="tns:InvoicesSoap">
+      <soap:address location="http://95.6.50.139:90/Services/Invoices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="InvoicesSoap12" binding="tns:InvoicesSoap12">
+      <soap12:address location="http://95.6.50.139:90/Services/Invoices.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

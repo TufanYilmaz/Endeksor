@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetDepartments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDepartmentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDepartmentsResult" type="tns:DepartmentListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DepartmentListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfDepartment" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:Message" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Message">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ResultType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SubscriberListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfSubscriber" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfSubscriber">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="subscriber" nillable="true" type="tns:subscriber" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="subscriber">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Department" type="tns:department" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubscriberType" type="tns:baseClass" />
+              <s:element minOccurs="0" maxOccurs="1" name="Tariff" type="tns:tariffBase" />
+              <s:element minOccurs="0" maxOccurs="1" name="Group" type="tns:group" />
+              <s:element minOccurs="0" maxOccurs="1" name="TaxInfo" type="tns:taxInfo" />
+              <s:element minOccurs="0" maxOccurs="1" name="Address" type="tns:address" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contacts" type="tns:contacts" />
+              <s:element minOccurs="0" maxOccurs="1" name="MainMeter" type="tns:meter" />
+              <s:element minOccurs="0" maxOccurs="1" name="UniqueNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PmumId" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Order" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubMeters" type="tns:ArrayOfMeter" />
+              <s:element minOccurs="0" maxOccurs="1" name="Relevant" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Constants" type="tns:ArrayOfConstantValue" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="baseClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ConstantValue">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="OrderBy" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Total" type="s:double" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="meter">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Mark" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Driver" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ContractPower" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="SettedPower" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Multiplier" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="SubscriberId" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="DepartmentId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="DepartmentCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubscriberCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MeterYear" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ProfilePeriod" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="UsingPlace" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="UsingPlaceString" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Cancelled" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="subscriberAttachState" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Mechanics" type="tns:ArrayOfMeterMechanic" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfMeterMechanic">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="meterMechanic" nillable="true" type="tns:meterMechanic" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="meterMechanic">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LineNo" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Serial" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Class" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SealNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProdYear" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CalibrationDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="QMin" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="QMax" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PressValue" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Radius" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tariffBase">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Code1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Code2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Code3" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="group">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="department">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:baseClass">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="departmentType" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Relevant" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Adres" type="tns:address" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contact" type="tns:contacts" />
+              <s:element minOccurs="0" maxOccurs="1" name="taxInfo" type="tns:taxInfo" />
+              <s:element minOccurs="0" maxOccurs="1" name="PrefixEInvoice" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PrefixEArchive" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="address">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="addressType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Line1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Line2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Line3" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TownId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Town" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CityId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="contacts">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Phone1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gsm" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gsm2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gsm3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Web" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="taxInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TaxType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaxOffice" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMeter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="meter" nillable="true" type="tns:meter" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfConstantValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ConstantValue" nillable="true" type="tns:ConstantValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GroupListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfGroup" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="group" nillable="true" type="tns:group" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDepartment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="department" nillable="true" type="tns:department" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCompanyGroups">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCompanyGroupsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCompanyGroupsResult" type="tns:GroupListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubscribers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CompanygroupId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubscribersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSubscribersResult" type="tns:SubscriberListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubscribersByTerminal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TerminalId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubscribersByTerminalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSubscribersByTerminalResult" type="tns:SubscriberListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubscriber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubscriberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSubscriberResult" type="tns:SubscriberResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SubscriberResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:subscriber" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UpdateAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address" type="tns:address" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateAddressResult" type="tns:BaseResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateContact">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Contact" type="tns:contacts" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateContactResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateContactResult" type="tns:BaseResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTaxInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TaxInfo" type="tns:taxInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTaxInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateTaxInfoResult" type="tns:BaseResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetDepartmentsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDepartments" />
+  </wsdl:message>
+  <wsdl:message name="GetDepartmentsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDepartmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGroupsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCompanyGroups" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGroupsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCompanyGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSubscribersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubscribers" />
+  </wsdl:message>
+  <wsdl:message name="GetSubscribersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubscribersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSubscribersByTerminalSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubscribersByTerminal" />
+  </wsdl:message>
+  <wsdl:message name="GetSubscribersByTerminalSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubscribersByTerminalResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSubscriberSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubscriber" />
+  </wsdl:message>
+  <wsdl:message name="GetSubscriberSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubscriberResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateAddress" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateContactSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateContact" />
+  </wsdl:message>
+  <wsdl:message name="UpdateContactSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTaxInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateTaxInfo" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTaxInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateTaxInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SubscribersSoap">
+    <wsdl:operation name="GetDepartments">
+      <wsdl:input message="tns:GetDepartmentsSoapIn" />
+      <wsdl:output message="tns:GetDepartmentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGroups">
+      <wsdl:input message="tns:GetCompanyGroupsSoapIn" />
+      <wsdl:output message="tns:GetCompanyGroupsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscribers">
+      <wsdl:input message="tns:GetSubscribersSoapIn" />
+      <wsdl:output message="tns:GetSubscribersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscribersByTerminal">
+      <wsdl:input message="tns:GetSubscribersByTerminalSoapIn" />
+      <wsdl:output message="tns:GetSubscribersByTerminalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscriber">
+      <wsdl:input message="tns:GetSubscriberSoapIn" />
+      <wsdl:output message="tns:GetSubscriberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAddress">
+      <wsdl:input message="tns:UpdateAddressSoapIn" />
+      <wsdl:output message="tns:UpdateAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContact">
+      <wsdl:input message="tns:UpdateContactSoapIn" />
+      <wsdl:output message="tns:UpdateContactSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTaxInfo">
+      <wsdl:input message="tns:UpdateTaxInfoSoapIn" />
+      <wsdl:output message="tns:UpdateTaxInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SubscribersSoap" type="tns:SubscribersSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDepartments">
+      <soap:operation soapAction="http://tempuri.org/GetDepartments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGroups">
+      <soap:operation soapAction="http://tempuri.org/GetCompanyGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscribers">
+      <soap:operation soapAction="http://tempuri.org/GetSubscribers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscribersByTerminal">
+      <soap:operation soapAction="http://tempuri.org/GetSubscribersByTerminal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscriber">
+      <soap:operation soapAction="http://tempuri.org/GetSubscriber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAddress">
+      <soap:operation soapAction="http://tempuri.org/UpdateAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContact">
+      <soap:operation soapAction="http://tempuri.org/UpdateContact" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTaxInfo">
+      <soap:operation soapAction="http://tempuri.org/UpdateTaxInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SubscribersSoap12" type="tns:SubscribersSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDepartments">
+      <soap12:operation soapAction="http://tempuri.org/GetDepartments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGroups">
+      <soap12:operation soapAction="http://tempuri.org/GetCompanyGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscribers">
+      <soap12:operation soapAction="http://tempuri.org/GetSubscribers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscribersByTerminal">
+      <soap12:operation soapAction="http://tempuri.org/GetSubscribersByTerminal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscriber">
+      <soap12:operation soapAction="http://tempuri.org/GetSubscriber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAddress">
+      <soap12:operation soapAction="http://tempuri.org/UpdateAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContact">
+      <soap12:operation soapAction="http://tempuri.org/UpdateContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTaxInfo">
+      <soap12:operation soapAction="http://tempuri.org/UpdateTaxInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Subscribers">
+    <wsdl:port name="SubscribersSoap" binding="tns:SubscribersSoap">
+      <soap:address location="http://95.6.50.139:90/Services/Subscribers.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SubscribersSoap12" binding="tns:SubscribersSoap12">
+      <soap12:address location="http://95.6.50.139:90/Services/Subscribers.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

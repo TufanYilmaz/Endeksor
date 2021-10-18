@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:paddingLeft="5dp"
+    android:paddingTop="1dp"
+    android:paddingBottom="1dp"
+    android:weightSum="100">
+    <TextView
+        android:text="Period"
+        android:layout_width="0dp"
+        android:layout_weight="90"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:id="@+id/txtPeriod"
+        android:textSize="25sp"
+        android:textColor="@android:color/background_dark" />
+    <TextView
+        android:text="Id"
+        android:layout_width="0dp"
+        android:layout_weight="10"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPeriodId"
+        android:textColor="@android:color/background_dark"
+        android:visibility="invisible" />
+</LinearLayout>

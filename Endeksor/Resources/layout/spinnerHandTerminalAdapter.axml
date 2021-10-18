@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+	android:minWidth="25px"
+    android:minHeight="25px"
+    android:paddingLeft="5dp"
+    android:paddingTop="1dp"
+    android:paddingBottom="1dp"
+    android:weightSum="100">
+	<TextView
+		android:id="@+id/tvSpinnerHandTerminalID"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="0"
+		android:text="ID" />
+	<TextView
+		android:id="@+id/tvSpinnerHandTerminalCode"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Code"
+		android:layout_weight="100"/>
+
+</LinearLayout>

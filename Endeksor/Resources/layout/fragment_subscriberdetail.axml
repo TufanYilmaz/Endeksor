@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:minHeight="400dp"
+	android:minWidth="300dp"
+    android:weightSum="100">
+    <LinearLayout
+        android:id="@+id/layoutfSubscriberCaption"
+        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="5"
+        android:weightSum="90">
+        <TextView
+            android:id="@+id/tvfCaption1"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="23"
+			android:textSize="@dimen/abc_text_size_small_material"
+            android:text="Caption1" />
+        <TextView
+            android:id="@+id/tvfCaption2"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="28"
+			android:textSize="@dimen/abc_text_size_small_material"
+            android:text="Caption2" />
+        <TextView
+            android:id="@+id/tvfCaption3"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="39"
+			android:textSize="@dimen/abc_text_size_small_material"
+            android:text="Caption3" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutfSubscriberName"
+        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="9">
+        <TextView
+            android:id="@+id/tvfSubscriberName"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Abone Adı" />
+    </LinearLayout>
+	
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_height="0dp"
+	android:layout_width="match_parent"
+	android:layout_weight="6"
+    android:weightSum="230">
+    
+    <TextView
+        android:text="@string/MeterCode"
+        android:layout_width="0dp"
+        android:layout_weight="60"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp" />
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="1dp"
+        android:background="#000" />
+    <TextView
+        android:text="@string/IndexCode"
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp" />
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="1dp"
+        android:background="#000" />
+    <TextView
+        android:text="@string/IndexInfo"
+        android:layout_width="0dp"
+        android:layout_weight="80"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp" />
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="1dp"
+        android:background="#000" />
+    <TextView
+        android:text="@string/Value"
+        android:layout_width="0dp"
+        android:layout_weight="50"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp" />
+</LinearLayout>
+	    <View
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="#000" />
+    <ListView
+        android:id="@+id/lvfIndexView"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="40"
+        android:divider="#101010"
+		android:paddingVertical="2dp"
+        android:dividerHeight="1dp" />
+	<LinearLayout
+	android:orientation="horizontal"
+	android:layout_height="0dp"
+	android:layout_width="match_parent"
+	android:layout_weight="7">
+	<TextView
+            android:id="@+id/tvfSubscriberLineInfo"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Bilgi :"
+			android:textColor="@android:color/holo_orange_light" />
+	</LinearLayout>
+    <GridLayout
+        android:id="@+id/layoutfSubscriberFooter"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="24"
+        android:columnCount="2"
+        android:rowCount="3">
+        <TextView
+            android:id="@+id/tvfPeriodStartValue"
+            android:text="@string/PeriodStartValue"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_width="wrap_content" />
+        <EditText
+            android:id="@+id/txtfPriorValue"
+            android:layout_width="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:editable="false" />
+        <TextView
+            android:id="@+id/tvfNewReadedValue"
+            android:text="@string/NewReadedValue"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
+        <EditText
+            android:id="@+id/txtfNewValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:inputType="numberDecimal" />
+        <CheckBox
+            android:id="@+id/chkfMeterLap"
+            android:text="@string/Lapped"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="2" />
+    </GridLayout>
+    <LinearLayout
+        android:id="@+id/layoutfSubscriberFooterButtons"
+        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="12"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/btnfCancel"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:text="@string/Cancel"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/btnfSaveClose"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:text="@string/Save"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>
